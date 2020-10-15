@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Template</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        position: relative;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: cornflowerblue;
+      }
+
+      .box {
+        position: relative;
+        width: 300px;
+        height: 300px;
+        background: chocolate;
+        border-radius: 50%;
+      }
+
+      .box::before {
+        content: "";
+        position: absolute;
+        top: 180px;
+        left: 70px;
+        width: 160px;
+        height: 60px;
+        background: #fff;
+        border-bottom-left-radius: 200px;
+        border-bottom-right-radius: 200px;
+        transition: all 0.3s;
+      }
+      .box:hover::before {
+        transform: scaleY(0.5);
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+
+      .eyes {
+        position: absolute;
+        top: 60px;
+        left: 50px;
+        width: 200px;
+        height: 80px;
+        display: flex;
+        justify-content: space-around;
+      }
+      .eyes .eye {
+        position: relative;
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background: #fff;
+      }
+
+      .eyes .eye::before {
+        content: "";
+        position: absolute;
+        top: 35px;
+        left: 60px;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #000;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <div class="eyes"><span class="eye"></span><span class="eye"></span></div>
+    </div>
+    <script>
+      const eyes = document.querySelectorAll(".eye");
+      const eyeCenters = [];
+      eyes.forEach((eye) => {
+        const bounds = eye.getBoundingClientRect();
+        eyeCenters.push({
+          x: bounds.x + bounds.width / 2,
+          y: bounds.y + bounds.height / 2,
+        });
+      });
+      window.addEventListener("mousemove", (event) => {
+        eyes.forEach((eye, index) => {
+          const center = eyeCenters[index]; // eye.getBoundingClientRect();
+          const x = center.x;
+          const y = center.y;
+          const radian = Math.atan2(event.pageY - y, event.pageX - x);
+          const degrees = radian * 180 / Math.PI;
+          eye.style.transform = `rotate(${degrees}deg)`;
+        });
+      });
+    </script>
+  </body>
+</html>
