@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Template</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        position: relative;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      div {
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        background: #ff0092;
+
+        /* width: 400px;
+        height: 400px;
+        background: radial-gradient(circle,  #ff0092 0,  #ff0092 200px, #fff  100%); */
+      }
+
+      div:nth-child(2) {
+        width: 200px;
+        height: 200px;
+        /* background: radial-gradient(circle,  #ff0092 0,  #ff0092 200px, #fff  100%); */
+        filter: blur(40px);
+        /* animation: animate 2s ease-in-out infinite; */
+      }
+
+      @keyframes animate {
+        0%,
+        100% {
+          filter: blur(40px);
+        }
+
+        50% {
+          filter: blur(10px);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div></div>
+    <div></div>
+  </body>
+</html>
